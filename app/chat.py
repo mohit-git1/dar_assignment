@@ -8,7 +8,13 @@ if str(PROJECT_ROOT) not in sys.path:
 
 import streamlit as st
 
-from app.config import CHROMA_COLLECTION_NAME, CHROMA_DB_DIR, DISTANCE_THRESHOLD, MODEL
+from app.config import (
+    CHROMA_COLLECTION_NAME,
+    CHROMA_DB_DIR,
+    DISTANCE_THRESHOLD,
+    DISTANCE_THRESHOLD_SCOPED,
+    MODEL,
+)
 from app.rag import generate, get_collection
 
 st.set_page_config(
@@ -45,7 +51,7 @@ with st.sidebar:
         st.metric("Total Indexed Chunks", "0")
 
     st.caption(f"**Embedder:** Chroma Default (MiniLM-L6-v2 ONNX)")
-    st.caption(f"**Distance Metric:** Cosine (Threshold: {DISTANCE_THRESHOLD})")
+    st.caption(f"**Distance Metric:** Cosine (Unscoped: {DISTANCE_THRESHOLD} / Scoped: {DISTANCE_THRESHOLD_SCOPED})")
     st.caption(f"**LLM Model:** {MODEL}")
 
     st.divider()

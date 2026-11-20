@@ -22,6 +22,15 @@ TOP_K = int(os.getenv("TOP_K", 5))
 
 # Distance threshold for relevance (cosine distance: relevant <= 0.42, unrelated >= 0.85)
 DISTANCE_THRESHOLD = float(os.getenv("DISTANCE_THRESHOLD", 0.50))
+DISTANCE_THRESHOLD_SCOPED = float(os.getenv("DISTANCE_THRESHOLD_SCOPED", 0.65))
+
+# Guardrail response for out-of-scope opinion and comparison queries
+OPINION_COMPETITOR_MESSAGE = (
+    "I can only answer questions about DarGlobal and Wasalt using the public information I've collected, "
+    "so I can't compare them with other companies or recommend alternatives. "
+    "I can tell you about DarGlobal's projects, Wasalt's property listings, locations, amenities, "
+    "or how the two companies differ. What would you like to know?"
+)
 
 # Model & API configuration
 MODEL = os.getenv("MODEL", "openrouter/free")
