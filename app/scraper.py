@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 USER_AGENT = "DarWasaltPropertyAssistant/1.0 (+https://github.com/dar-wasalt-assistant; property research bot)"
 SLEEP_INTERVAL = 1.5
-MAX_PAGES_PER_SITE = 15
+MAX_PAGES_PER_SITE = 35
 
 DISALLOWED_KEYWORDS = (
     "login",
@@ -289,10 +289,11 @@ def scrape_site(source_name: str, start_url: str, output_file: Path) -> dict:
 
         time.sleep(SLEEP_INTERVAL)
 
-    # Save to JSON
-    output_file.parent.mkdir(parents=True, exist_ok=True)
-    with open(output_file, "w", encoding="utf-8") as f:
-        json.dump(scraped_pages, f, indent=2, ensure_ascii=False)
+    # Save to JSON (only overwrite if we actually scraped pages or if file does not exist)
+    if scraped_pages or not output_file.exists():
+        output_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(output_file, "w", encoding="utf-8") as f:
+            json.dump(scraped_pages, f, indent=2, ensure_ascii=False)
 
     total_chars = sum(len(p["text"]) for p in scraped_pages)
 

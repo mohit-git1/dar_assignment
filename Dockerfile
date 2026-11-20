@@ -5,6 +5,7 @@ WORKDIR /app
 # Prevent Python from writing .pyc files and enable unbuffered logging
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
+    PYTHONPATH="/app" \
     PORT=8501
 
 # Install dependencies

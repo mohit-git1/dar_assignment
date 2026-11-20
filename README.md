@@ -62,3 +62,18 @@ python -m app.rag
 ```bash
 streamlit run app/chat.py
 ```
+
+---
+
+## Docker Deployment
+
+Build the container image (this automatically ingests raw data and bakes ChromaDB with the default ONNX model into the image):
+```bash
+docker build -t dar-property-assistant:latest .
+```
+
+Run the container using your `.env` file:
+```bash
+docker run --rm --env-file .env -e PORT=8501 -p 8501:8501 dar-property-assistant:latest
+```
+Access the application at `http://localhost:8501`.
